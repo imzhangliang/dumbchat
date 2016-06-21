@@ -1,0 +1,34 @@
+<html>
+<head>
+<style type="text/css">
+#history {width: 300px;  border: 1px solid #000; margin: 20px 0;}
+#username {color: red;}
+</style>
+<script type="text/javascript" src="jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+        $("#send_btn").click(function(){
+		//alert($("#message").val());
+		var username,message;
+		username = $("#username").text();
+		message = $("#message").val();
+		$("#message").val("");
+		//$("#history").append("<p>" + username + ": " + message + "</p>\n");
+		$.post("send.php", "username=" + username + "&message=" + message);
+	});
+	setInterval(function(){$("#history").load("chat.dat")}, 2000);
+});
+
+</script>
+</head>
+<body>
+<h1>Chatting Room</h1>
+<div id="wrapper">
+<p>用户名:<span id="username">Michael</p></p>
+<div id="history">
+</div>
+<input id="message" width="300" />
+<button id="send_btn">Send</button>
+</div>
+</body>
+</html>
